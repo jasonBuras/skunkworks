@@ -1,1 +1,49 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Form</title>
+</head>
+<body>
+    <h1>Request Form</h1>
+    <form id="submissionForm" enctype="multipart/form-data">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+		
+		<label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+        <label for="image">Attach Image:</label><br>
+        <input type="file" id="image" name="image" accept="image/*"><br><br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+	
+	<script>
+		async function submitForm() {
+			const form = document.getElementById('submissionForm');
+			const formData = new FormData(form);
+
+			try {
+				const response = await fetch('http://localhost:5000/submit', {
+					method: 'POST',
+					body: formData
+				});
+				if (response.ok) {
+					const responseData = await response.json();  // Parse JSON response
+					alert(`Form submitted successfully!`);
+				} else {
+					alert('Failed to submit form.');
+				}
+			} catch (error) {
+				alert('Error: ' + error.message);
+			}
+		}
+
+    </script>
+</body>
+</html>

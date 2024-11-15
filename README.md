@@ -1,7 +1,9 @@
 # Request Form (Testing Grounds)
 This project consists of a simple form submission setup using a Flask backend and an HTML frontend. Users can submit their name, email, message, and optionally attach an image. The form data is saved on the server side to a CSV file, and any uploaded images are stored in an `uploads` directory.
 
-*This is a proof of concept*
+*This is a proof of concept.* 
+
+Pod-4's implementation of SQLalchemy will replace the functionality of [server.py](server/server.py). It currently just serves as a tester for the request form.
 
 # How does this work?
 ```
@@ -45,7 +47,6 @@ py server.py
 ```bash
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
 ```
-
 - This is a standard notification from Flask indicating that the built-in development server is not intended for production use. The development server is suitable for testing and development because it provides features like auto-reloading and detailed error messages, but it lacks the performance and security features needed for a production environment. 
 4. Access the [Form Page](https://jasonburas.github.io/skunkworks/index.html)
 	- Note: This can also be done locally by downloading [index.html](docs/index.html) and opening it with a browser application.
@@ -57,3 +58,5 @@ WARNING: This is a development server. Do not use it in a production deployment.
 	- The current build has no safeguards to check for valid emails.
 	- We need to talk to pod-9 about Authentication, and pod-4 about the database
 	- May have to look into a way to limit file size
+- Design
+	- This is currently just a proof of concept. Now that we have established a foundation, we will spend some time focusing on the design. 

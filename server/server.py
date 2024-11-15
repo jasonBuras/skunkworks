@@ -15,7 +15,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/submit', methods=['POST'])
-def submit_form():
+def submit_form(): 
     """
     This is for testing purposes. 
     Pod-4, feel free to use this and convert this function to work with sqlalchemy

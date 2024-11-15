@@ -3,16 +3,23 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 
+# Initialize Flask app
 app = Flask(__name__)
 CORS(app)
 
+# Configure upload folder
 UPLOAD_FOLDER = 'uploads'
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Ensure the uploads directory exists
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/submit', methods=['POST'])
 def submit_form():
     """
+    This is for testing purposes. 
+    Pod-4, feel free to use this and convert this function to work with sqlalchemy
+
     Handles form submission at the `/submit` endpoint.
 
     This endpoint receives POST requests containing form data, including

@@ -2,45 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+	<!-- Ensures proper rendering and touch zooming on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Form</title>
 </head>
 <body>
     <h1>Request Form</h1>
+	<!-- Form element with an ID for easy access in JavaScript -->
     <form id="submissionForm" enctype="multipart/form-data">
+		<!-- Name input field -->
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br><br>
 
+		<!-- Email input field with built-in validation -->
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" required><br><br>
 		
+		<!-- Message textarea -->
 		<label for="message">Message:</label><br>
         <textarea id="message" name="message" rows="4" required></textarea><br><br>
 
+		<!-- File input for image upload -->
         <label for="image">Attach Image:</label><br>
         <input type="file" id="image" name="image" accept="image/*"><br><br>
 
-        <button type="button" onclick="submitForm()">Submit</button>
+		<!-- Submit button that triggers the submitForm() function -->
+        <button type="button" id="submitButton" onclick="submitForm()">Submit</button>
     </form>
 	
 	<script>
+		// Asynchronous function to handle form submission
 		async function submitForm() {
+			// Get references to the form and submit button elements
 			const form = document.getElementById('submissionForm');
-			const formData = new FormData(form);
+    		const submitButton = document.getElementById('submitButton');
+
+			// Create a FormData object from the form element
+    		const formData = new FormData(form);
+
+			// Disable the submit button to prevent multiple clicks
+			submitButton.disabled = true;
+			// Change the button text to indicate the submission is in progress
+    		submitButton.textContent = 'Submitting...';
 
 			try {
+				// Send a POST request to the server with the form data
 				const response = await fetch('http://localhost:5000/submit', {
 					method: 'POST',
 					body: formData
 				});
+
+				// Check if the response is successful
 				if (response.ok) {
+					// Parse the JSON response from the server
 					const responseData = await response.json();  // Parse JSON response
+					// Alert the user that the form was submitted successfully
 					alert(`Form submitted successfully!`);
+					// Reset the form fields to their default values
+					form.reset();
 				} else {
+					// Alert the user that the submission failed
 					alert('Failed to submit form.');
 				}
 			} catch (error) {
+				// Catch any network or server errors and alert the user
 				alert('Error: ' + error.message);
+			} finally{
+				// Re-enable the submit button regardless of success or failure
+				submitButton.disabled = false;
+				// Reset the button text to its original state
+				submitButton.textContent = 'Submit';
 			}
 		}
 
